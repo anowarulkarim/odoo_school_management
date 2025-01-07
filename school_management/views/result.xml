@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data>
 
@@ -38,23 +37,36 @@
             </field>
         </record>
 
+        <!-- Kanban View -->
+<!--        <record id="view_result_kanban" model="ir.ui.view">-->
+<!--            <field name="name">school.management.result.kanban</field>-->
+<!--            <field name="model">school_management.result</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <kanban class="o_kanban_dashboard">-->
+<!--                    <templates>-->
+<!--                        <t t-name="kanban-box">-->
+<!--                            <div class="oe_kanban_content">-->
+<!--                                &lt;!&ndash; Display student name using t-esc &ndash;&gt;-->
+<!--                                <strong>-->
+<!--                                    <span t-esc="record.student_id.name"/>-->
+<!--                                </strong>-->
+<!--                                &lt;!&ndash; Display result using t-esc &ndash;&gt;-->
+<!--                                <div>-->
+<!--                                    <span t-esc="record.result"/>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </t>-->
+<!--                    </templates>-->
+<!--                </kanban>-->
+<!--            </field>-->
+<!--        </record>-->
+
         <!-- Action -->
         <record id="action_result" model="ir.actions.act_window">
             <field name="name">Results</field>
             <field name="res_model">school_management.result</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-                <p class="o_view_nocontent_create">
-                    Click to create a new result.
-                </p>
-            </field>
+            <field name="view_mode">tree,form,kanban</field>
         </record>
 
-        <!-- Menu Item -->
-        <menuitem id="menu_school_management_results"
-                  name="Results"
-                  parent="menu_school_management"
-                  action="action_result"
-                  sequence="2"/>
     </data>
 </odoo>

@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import UserError
 
 
 class Playground(models.Model):
@@ -7,6 +8,8 @@ class Playground(models.Model):
 
     name = fields.Char()
     location = fields.Char()
+    area = fields.Float()
+    type = fields.Selection([('indoor', 'Indoor'), ('outdoor', 'Outdoor')], default='outdoor')
 
 
 class SwimmingPool(models.Model):
@@ -29,6 +32,7 @@ class School(models.Model):
     contact = fields.Char()
     email = fields.Char()
     website = fields.Char()
+    color = fields.Char()
     established_date = fields.Date()
     school_code = fields.Char()
     teacher_ids = fields.One2many('school_management.teacher', 'school_id', string='Teachers', ondelete='cascade')
@@ -37,53 +41,80 @@ class School(models.Model):
     playground_ids = fields.Many2many('school_management.playground', string='Playgrounds')
     swimming_pool_ids = fields.Many2many('school_management.swimming_pool', 'school_id', string='Swimming Pools')
 
-    def create(self, vals):
-        # create record of related model school_management.teacher by the  command triple (CREATE, 0, values)
-        new_teacher_list = [
-            (0, 0, {'name': 'Teacher 1', 'subject': 'Bangla', 'school_id': self.id}),
-            (0, 0, {'name': 'Teacher 2', 'subject': 'English', 'school_id': self.id}),
-            (0, 0, {'name': 'Teacher 3', 'subject': 'Math', 'school_id': self.id}),
-        ]
-        if not vals.get('teacher_ids'):
-            vals['teacher_ids'] = new_teacher_list
+    def print_school_report(self):
+        return self.env.ref('school_management.school_management_school_report_action').report_action(self)
 
-        # create record of related model school_management.student by the  command triple (CREATE, 0, values)
-        new_student_list = [
-            (0, 0, {'name': 'Student 1', 'roll_number': '001', 'school_id': self.id}),
-            (0, 0, {'name': 'Student 2', 'roll_number': '002', 'school_id': self.id}),
-            (0, 0, {'name': 'Student 3', 'roll_number': '003', 'school_id': self.id}),
-        ]
-        if not vals.get('student_ids'):
-            vals['student_ids'] = new_student_list
-        return super(School, self).create(vals)
+    def print_school_student_count_report(self):
+        data = {'count': len(self.student_ids)}
+        return self.env.ref('school_management.school_management_school_student_count_report_action').report_action(
+            self, data=data)
 
-    def write(self, vals):
-        # Check if school_code has changed or exists in vals
-        if 'school_code' in vals:
-            school_code = vals['school_code']
-        else:
-            school_code = self.school_code  # Use the current value if not in vals
+    def return_action_to_open_student_list(self):
+        action = self.env.ref('school_management.school_management_student_action').read()[0]
+        action['domain'] = [('school_id', '=', self.id)]
+        action['context'] = {'default_school_id': self.id}
+        action['views'] = [(self.env.ref('school_management.school_management_student_view_tree').id, 'tree')]
+        return action
 
-        # Update the teacher names with the new school_code
-        teacher_ids_update = [
-            (1, teacher.id, {'name': f"{school_code} - {teacher.name}"})
-            for teacher in self.teacher_ids
-        ]
-        vals['teacher_ids'] = teacher_ids_update
+    # def print_school_details_report(self):
+    #     students = [
+    #         {'name': student.name, 'roll_number': student.roll_number, 'standard': student.standard}
+    #         for student in self.student_ids
+    #     ]
+    #     teachers = [
+    #         {'name': teacher.name, 'subject': teacher.subject}
+    #         for teacher in self.teacher_ids
+    #     ]
+    #
+    #     data = {
+    #         'school_name': self.name,
+    #         'school_address': self.address,
+    #         'students': students,
+    #         'teachers': teachers,
+    #         'total_pages': 1,  # For simplicity
+    #         'current_page': 1
+    #     }
+    #
+    #     return self.env.ref('school_management.school_management_school_details_report_action').report_action(
+    #         self, data=data
+    #     )
 
-        # Update the student names with the new school_code
-        for student in self.student_ids:
-            student.write({'name': f"{school_code} - {student.name}"})
+    def print_school_details_report(self):
+        data1 = {
+            'school_name': self.name,
+            'address': self.address,
+            'students': sorted(
+                [{'name': student.name, 'roll_number': student.roll_number, 'standard': student.standard} for student in
+                 self.student_ids],
+                key=lambda x: x['standard']
+            ),
+            'teachers': [{'name': teacher.name, 'subject': teacher.subject} for teacher in self.teacher_ids],
+        }
+        return self.env.ref('school_management.school_management_school_report_action').report_action(self, data=data1)
 
-        # Call the superclass write method to apply changes to the School record
-        return super(School, self).write(vals)
+    def print_school_details_report1(self,context):
+        """
+        Method to print a report for the current active school
+        when the form view is open.
+        """
+        # active_school = self.env.context.get('active_id')
+        # if not active_school:
+        #     raise UserError("No school selected!")
+        #
+        # school = self.env['school_management.school'].browse(active_school)
+        # if not school:
+        #     raise UserError("Invalid school!")
 
-    def unlink(self):
-        for school in self:
-            if school.playground_ids:
-                school.write({'playground_ids': [(2, playground.id, 0) for playground in school.playground_ids]})
-            if school.swimming_pool_ids:
-                school.write({'swimming_pool_ids': [(3, pool.id, 0) for pool in school.swimming_pool_ids]})
-        return super(School, self).unlink()
-
-
+        # Here, you can generate the report for the school. You can replace this with your actual report logic
+        # For example, generating a PDF or printing some details.
+        data1 = {
+            'school_name': self.name,
+            'address': self.address,
+            'students': sorted(
+                [{'name': student.name, 'roll_number': student.roll_number, 'standard': student.standard} for student in
+                 self.student_ids],
+                key=lambda x: x['standard']
+            ),
+            'teachers': [{'name': teacher.name, 'subject': teacher.subject} for teacher in self.teacher_ids],
+        }
+        return self.env.ref('school_management.school_management_school_report_action').report_action(self, data=data1)

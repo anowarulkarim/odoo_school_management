@@ -1,0 +1,50 @@
+<odoo>
+
+    <record id="view_playground_tree" model="ir.ui.view">
+        <field name="name">Playground Tree</field>
+        <field name="model">school_management.playground</field>
+        <field name="arch" type="xml">
+            <tree string="Playgrounds">
+                <field name="name"/>
+                <field name="location"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Playground Form View -->
+    <record id="view_playground_form" model="ir.ui.view">
+        <field name="name">Playground Form</field>
+        <field name="model">school_management.playground</field>
+        <field name="arch" type="xml">
+            <form string="Playground">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="location"/>
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Playground Search View -->
+    <record id="view_playground_search" model="ir.ui.view">
+        <field name="name">Playground Search</field>
+        <field name="model">school_management.playground</field>
+        <field name="arch" type="xml">
+            <search string="Search Playgrounds">
+                <field name="name"/>
+                <field name="location"/>
+
+            </search>
+        </field>
+    </record>
+
+    <record id="action_playground" model="ir.actions.act_window">
+        <field name="name">Playgrounds</field>
+        <field name="res_model">school_management.playground</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help">Manage all the playgrounds in your school.</field>
+    </record>
+</odoo>
