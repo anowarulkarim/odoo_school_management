@@ -1,0 +1,90 @@
+<odoo>
+    <record id="report_certificate_paper_format" model="report.paperformat">
+        <field name="name">Certificate A4</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">20</field>
+        <field name="margin_right">20</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">5</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <template id="student_certificate_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="student">
+                <div class="page" style="padding: 50px; background: linear-gradient(to bottom, #ffffff, #f9f9f9); border: 10px solid #2e7d32; border-radius: 20px; font-family: 'Georgia', serif; position: relative; box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);">
+                    <!-- Decorative Border -->
+                    <div style="position: absolute; top: 10px; bottom: 10px; left: 10px; right: 10px; border: 5px solid #fbc02d; border-radius: 15px;"></div>
+
+                    <!-- Header -->
+                    <div style="text-align: center; margin-bottom: 40px; z-index: 1; position: relative;">
+                        <h1 style="font-size: 50px; font-weight: bold; color: #2e7d32; text-transform: uppercase; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);">Certificate of Achievement</h1>
+                        <h2 style="font-size: 20px; color: #6a1b9a; text-transform: uppercase; margin-bottom: 10px; font-style: italic;" t-esc="student.school_id.name"/>
+                        <p style="font-size: 18px; font-weight: 600; color: #555;">This is to certify that</p>
+                        <h2 style="font-size: 36px; font-weight: bold; color: #1b5e20; text-transform: uppercase;" t-esc="student.name"/>
+                        <p style="font-size: 18px; color: #555; margin-top: 10px;">Has successfully participated in the courses listed below:</p>
+                    </div>
+
+                    <!-- Student Information -->
+                    <div style="width: 80%; margin: 20px auto; border: 2px solid #2e7d32; border-radius: 10px; padding: 20px; background: #e8f5e9;">
+                        <h3 style="text-align: center; color: #2e7d32; font-weight: bold;">Student Information</h3>
+                        <table style="width: 100%; font-size: 16px; border-collapse: collapse; margin-top: 20px;">
+                            <tr style="background: #c5e1a5;">
+                                <td style="padding: 10px; font-weight: bold; border: 1px solid #ccc;">Roll Number</td>
+                                <td style="padding: 10px; border: 1px solid #ccc;" t-esc="student.roll_number"/>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; font-weight: bold; border: 1px solid #ccc;">Standard</td>
+                                <td style="padding: 10px; border: 1px solid #ccc;" t-esc="student.standard"/>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; font-weight: bold; border: 1px solid #ccc;">Section</td>
+                                <td style="padding: 10px; border: 1px solid #ccc;" t-esc="student.section"/>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; font-weight: bold; border: 1px solid #ccc;">Version</td>
+                                <td style="padding: 10px; border: 1px solid #ccc;" t-esc="student.version"/>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; font-weight: bold; border: 1px solid #ccc;">Group</td>
+                                <td style="padding: 10px; border: 1px solid #ccc;" t-esc="student.group"/>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- Courses Section -->
+                    <div style="margin-top: 40px; text-align: center;">
+                        <h3 style="color: #2e7d32; font-weight: bold;">Enrolled Courses</h3>
+                        <ul style="list-style: none; padding-left: 0; font-size: 16px; color: #555;">
+                            <t t-foreach="student.course_ids" t-as="course">
+                                <li style="margin: 5px 0; font-weight: bold;">
+                                    <span t-esc="course.name"/> (<span t-esc="course.code"/>)
+                                </li>
+                            </t>
+                        </ul>
+                    </div>
+
+                    <!-- Footer -->
+                    <div style="text-align: center; margin-top: 50px; position: relative; z-index: 1;">
+                        <p style="font-size: 18px; font-weight: bold; color: #2e7d32;">Issued on: <span t-esc="student.admission_date"/></p>
+                        <p style="font-size: 14px; color: #555;">Issued by: <span t-esc="student.school_id.name"/></p>
+                        <p style="font-size: 14px; margin-top: 20px; color: #555;">For verification, contact: <a href="http://www.example.com" style="color: #2e7d32; text-decoration: none;">www.example.com</a></p>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="student_certificate_report_action" model="ir.actions.report">
+        <field name="name">Student Certificate</field>
+        <field name="model">school_management.student</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">school_management.student_certificate_template</field>
+        <field name="report_file">school_management.student_certificate_template</field>
+        <field name="binding_model_id" ref="school_management.model_school_management_student"/>
+    </record>
+</odoo>

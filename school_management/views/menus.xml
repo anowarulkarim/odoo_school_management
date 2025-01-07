@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="school_management_menu" name="School Management" sequence="10"/>
+
+    <menuitem id="school_management_student_menu" name="Student" parent="school_management_menu"
+              action="school_management_student_action" sequence="15"/>
+<!--    <menuitem id="school_management_school_menu" name="School" parent="school_management_menu"-->
+<!--              action="action_school" sequence="15"/>-->
+<!--    <menuitem id="courses_menu" parent="school_management_menu" name="Courses" action="action_courses" sequence="1"/>-->
+
+
+</odoo>

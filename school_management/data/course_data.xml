@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="course_1" model="school_management.course">
+        <field name="name">Mathematics</field>
+        <field name="code">MATH101</field>
+        <field name="standard">10</field>
+        <field name="student_ids" eval="[(4, 0, [ref('student_1'), ref('student_10')])]"/>
+    </record>
+    <record id="course_2" model="school_management.course">
+        <field name="name">Bengali</field>
+        <field name="code">BNG101</field>
+        <field name="standard">10</field>
+        <field name="student_ids" eval="[(4, 0, [ref('student_13'), ref('student_20')])]"/>
+    </record>
+</odoo>

@@ -1,0 +1,170 @@
+<odoo>
+    <data>
+        <!-- naming convention : <model_name>_view_<view_type>-->
+        <record id="school_management_student_view_form" model="ir.ui.view">
+            <field name="name">school.management.student.view.form</field>
+            <field name="model">school_management.student</field>
+            <field name="arch" type="xml">
+                <form string="School Student" create="true" edit="true" duplicate="true" delete="true"
+                      disable_autofocus="true">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="age"/>
+                            <field name="gender"/>
+                            <field name="date_of_birth"/>
+                            <field name="image" widget="image" class="oe_avatar"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="school_management_student_view_tree" model="ir.ui.view">
+            <field name="name">school.management.student.view.tree</field>
+            <field name="model">school_management.student</field>
+            <field name="arch" type="xml">
+                <tree string="School Student">
+                    <field name="name"/>
+                    <field name="age"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="school_management_student_view_search" model="ir.ui.view">
+            <field name="name">school.management.student.view.search</field>
+            <field name="model">school_management.student</field>
+            <field name="arch" type="xml">
+                <search string="Search Student">
+                    <field name="name"/>
+                    <field name="age"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="school_management_student_simple_form" model="ir.ui.view">
+            <field name="name">school.management.student.simple.form</field>
+            <field name="model">school_management.student</field>
+            <field name="arch" type="xml">
+                <form string="School Student" create="true" edit="true" duplicate="true" delete="true"
+                      disable_autofocus="true">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="image" widget="image" class="oe_avatar"/>
+                            <field name="roll_number"/>
+                            <field name="standard"/>
+                            <field name="section"/>
+                            <field name="version"/>
+                            <field name="admission_date"/>
+                            <field name="group"/>
+                        </group>
+                        <group>
+                            <field name="weight_in_kg"/>
+                            <field name="weight_in_pounds"/>
+                        </group>
+                        <group>
+                            <field name="parent_id"/>
+                            <field name="parent_name" readonly="1"/>
+                            <field name="school_id"/>
+                        </group>
+                        <!-- Placeholder for course_ids if you have a relation -->
+                        <group>
+                            <field name="course_ids" widget="many2many_tags"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="open_create_student" model="ir.actions.act_window">
+            <field name="name">Create a Student</field>
+            <field name="res_model">school_management.student</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="school_management_student_simple_form"/>
+            <field name="target">new</field>
+            <field name="context">{"default_age": 6}</field>
+        </record>
+        <record id="school_management_student_view_kanban" model="ir.ui.view">
+            <field name="name">school.management.student.view.kanban</field>
+            <field name="model">school_management.student</field>
+            <field name="arch" type="xml">
+                <kanban on_create="school_management.open_create_student"
+                        default_order="standard desc"
+                        default_group_by="standard"
+                        archivable="false"
+                        records_draggable="false"
+                        banner_route="/school_management/banner">
+                    <field name="name"/>
+                    <field name="age"/>
+                    <field name="standard"/>
+                    <field name="roll_number"/>
+                    <field name="section"/>
+                    <field name="image"/>
+                    <progressbar field="section" colors='{"A": "success", "B": "warning", "C": "danger"}'/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+
+                                <div class="o_kanban_image">
+                                    <img t-att-src="kanban_image('school_management.student', 'image', record.id.value)"
+                                         class="o_image_64_max" height="52"/>
+                                </div>
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                                <div>
+                                    <field name="age"/>
+                                    years old
+                                </div>
+                                <div>
+                                    <field name="standard"/>
+                                    standard
+                                </div>
+                                <div>
+                                    <field name="roll_number"/>
+                                    roll number
+                                </div>
+                                <div>
+                                    <field name="section"/>
+                                    Section
+                                </div>
+                            </div>
+                        </t>
+                        <t t-name="kanban-menu" groups="base.group_user">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-6 o_kanban_card_manage_section o_kanban_manage_view">
+                                        <h5 role="menuitem" class="o_kanban_card_manage_title">
+                                            <span>View</span>
+                                        </h5>
+                                        <div role="menuitem">
+                                            <a name="action_view_results" type="object">Results</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record id="action_view_results" model="ir.actions.act_window">
+            <field name="name">Student Results</field>
+            <field name="res_model">school_management.result</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('student_id', '=', active_id)]</field>
+        </record>
+
+
+        <record id="school_management_student_action" model="ir.actions.act_window">
+            <field name="res_model">school_management.student</field>
+            <field name="view_mode">tree,kanban,form</field>
+
+        </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!-- Tree View -->
+        <record id="view_result_tree" model="ir.ui.view">
+            <field name="name">school.management.result.tree</field>
+            <field name="model">school_management.result</field>
+            <field name="arch" type="xml">
+                <tree string="Results">
+                    <field name="student_id" string="Student"/>
+                    <field name="course_id" string="Course"/>
+                    <field name="grade" string="Grade"/>
+                    <field name="marks" string="Marks"/>
+                    <field name="result_date" string="Result Date"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_result_form" model="ir.ui.view">
+            <field name="name">school.management.result.form</field>
+            <field name="model">school_management.result</field>
+            <field name="arch" type="xml">
+                <form string="Result">
+                    <sheet>
+                        <group>
+                            <field name="student_id" string="Student"/>
+                            <field name="course_id" string="Course"/>
+                        </group>
+                        <group>
+                            <field name="grade" string="Grade"/>
+                            <field name="marks" string="Marks"/>
+                            <field name="result_date" string="Result Date"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_result" model="ir.actions.act_window">
+            <field name="name">Results</field>
+            <field name="res_model">school_management.result</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_create">
+                    Click to create a new result.
+                </p>
+            </field>
+        </record>
+
+        <!-- Menu Item -->
+        <menuitem id="menu_school_management_results"
+                  name="Results"
+                  parent="menu_school_management"
+                  action="action_result"
+                  sequence="2"/>
+    </data>
+</odoo>

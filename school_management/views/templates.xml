@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <template id="school_management.portal_my_home" inherit_id="portal.portal_my_home">
+            <xpath expr="//*[hasclass('o_portal_my_home')]" position="before">
+                <owl-component name="school_management.MyComponent"/>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

@@ -1,0 +1,91 @@
+<odoo>
+    <!-- Report Template for Student -->
+    <template id="student_report_template">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="student">
+            <div class="page" style="padding: 30px; background-color: #f9f9f9; border: 1px solid #ccc; border-radius: 12px; font-family: 'Arial', sans-serif; color: #333; line-height: 1.6;">
+                <!-- Header Section -->
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <h1 style="font-size: 36px; color: #2e7d32; font-weight: bold; margin-bottom: 10px;">Student Transcript</h1>
+                    <p style="font-size: 18px; color: #555;">Academic Performance Summary</p>
+                </div>
+
+                <!-- Student Information Section -->
+                <div style="margin-bottom: 30px; padding: 20px; background-color: #ffffff; border: 1px solid #ddd; border-radius: 8px;">
+                    <h2 style="font-size: 22px; color: #2196f3; font-weight: bold; margin-bottom: 15px;">Student Details</h2>
+                    <p><strong>Name:</strong> <span t-esc="student.name"/></p>
+                    <p><strong>Roll Number:</strong> <span t-esc="student.roll_number"/></p>
+                    <p><strong>Standard:</strong> <span t-esc="student.standard"/></p>
+                    <p><strong>Section:</strong> <span t-esc="student.section"/></p>
+                    <p><strong>Group:</strong> <span t-esc="student.group"/></p>
+                    <p><strong>Version:</strong> <span t-esc="student.version"/></p>
+                    <p><strong>Admission Date:</strong> <span t-esc="student.admission_date"/></p>
+                    <p><strong>Parent Name:</strong> <span t-esc="student.parent_name"/></p>
+                </div>
+
+                <!-- Enrolled Courses Section -->
+                <div style="margin-bottom: 30px; padding: 20px; background-color: #ffffff; border: 1px solid #ddd; border-radius: 8px;">
+                    <h2 style="font-size: 22px; color: #2196f3; font-weight: bold; margin-bottom: 15px;">Enrolled Courses</h2>
+                    <ul style="list-style-type: disc; padding-left: 20px; font-size: 16px;">
+                        <t t-foreach="student.course_ids" t-as="course">
+                            <li style="color: #555;" t-esc="course.name"/>
+                        </t>
+                    </ul>
+                </div>
+
+                <!-- Student Results Section -->
+                <div style="padding: 20px; background-color: #ffffff; border: 1px solid #ddd; border-radius: 8px;">
+                    <h2 style="font-size: 22px; color: #2196f3; font-weight: bold; margin-bottom: 15px;">Student Results</h2>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 16px;">
+                        <thead>
+                            <tr style="background-color: #4caf50; color: #fff;">
+                                <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Subject</th>
+                                <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Marks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="student.result_ids" t-as="result">
+                                <tr style="background-color: #f7f7f7;">
+                                    <td style="border: 1px solid #ddd; padding: 10px;" t-esc="result.course_id.name"/>
+                                    <td style="border: 1px solid #ddd; padding: 10px;" t-esc="result.marks"/>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Footer -->
+
+            </div>
+        </t>
+    </t>
+</template>
+
+
+    <!-- Report Action -->
+    <record id="action_student_report" model="ir.actions.report">
+        <field name="name">Student Transcript</field>
+        <field name="model">school_management.student</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">school_management.student_report_template</field>
+        <field name="report_file">school_management.student_report_template</field>
+        <field name="binding_model_id" ref="school_management.model_school_management_student"/>
+    </record>
+
+    <!-- Report Paper Format (A4 Landscape) -->
+    <record id="report_transcript_paper_format" model="report.paperformat">
+        <field name="name">Transcript A4</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">20</field>
+        <field name="margin_right">20</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">5</field>
+        <field name="dpi">90</field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="result_1" model="school_management.result">
+        <field name="student_id" ref="student_1"/>
+        <field name="course_id" ref="course_1"/>
+        <field name="grade">a+</field>
+        <field name="marks">95.5</field>
+        <field name="result_date">2024-12-10</field>
+    </record>
+
+    <record id="result_2" model="school_management.result">
+        <field name="student_id" ref="student_2"/>
+        <field name="course_id" ref="course_2"/>
+        <field name="grade">b</field>
+        <field name="marks">75.0</field>
+        <field name="result_date">2024-12-10</field>
+    </record>
+</odoo>

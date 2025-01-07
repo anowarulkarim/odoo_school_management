@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- QWeb Template for Course Report -->
+    <template id="course_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="course">
+                <t t-call="web.external_layout">
+                    <div class="page">
+    <div class="card" style="border: 2px solid #007bff; border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 800px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); background-color: #f8f9fa;">
+        <h2 class="text-center" style="font-weight: bold; color: #007bff; text-shadow: 1px 1px 2px #6c757d; margin-bottom: 20px;">Course Report</h2>
+        <table class="table" style="width: 100%; font-size: 16px; border-collapse: collapse;">
+            <tbody>
+                <tr style="background-color: #e3f2fd;">
+                    <th style="width: 30%; text-align: left; padding: 10px; color: #0d47a1;">Course Name</th>
+                    <td style="padding: 10px; text-align: left; color: #1e88e5; font-weight: bold;" t-esc="course.name"/>
+                </tr>
+                <tr style="background-color: #f1f8e9;">
+                    <th style="text-align: left; padding: 10px; color: #33691e;">Course Code</th>
+                    <td style="padding: 10px; text-align: left; color: #66bb6a; font-weight: bold;" t-esc="course.code"/>
+                </tr>
+                <tr style="background-color: #fffde7;">
+                    <th style="text-align: left; padding: 10px; color: #f9a825;">Standard</th>
+                    <td style="padding: 10px; text-align: left; color: #ffeb3b; font-weight: bold;" t-esc="course.standard"/>
+                </tr>
+                <tr style="background-color: #ffebee;">
+                    <th style="text-align: left; padding: 10px; color: #c62828;">Teachers</th>
+                    <td style="padding: 10px;">
+                        <ul style="list-style-type: none; margin: 0; padding: 0; color: #d32f2f;">
+                            <t t-foreach="course.teacher_ids" t-as="teacher">
+                                <li style="padding: 5px 0; font-weight: bold; color: #b71c1c;" t-esc="teacher.name"/>
+                            </t>
+                        </ul>
+                    </td>
+                </tr>
+                <tr style="background-color: #e3f2fd;">
+                    <th style="text-align: left; padding: 10px; color: #0d47a1;">Students</th>
+                    <td style="padding: 10px;">
+                        <ul style="list-style-type: none; margin: 0; padding: 0; color: #1e88e5;">
+                            <t t-foreach="course.student_ids" t-as="student">
+                                <li style="padding: 5px 0; font-weight: bold; color: #1565c0;" t-esc="student.name"/>
+                            </t>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- Report Action -->
+    <record id="course_report_action" model="ir.actions.report">
+        <field name="name">Course Report</field>
+        <field name="model">school_management.course</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">school_management.course_report_template</field>
+        <field name="report_file">school_management.course_report_template</field>
+        <field name="print_report_name">'Course Report - ' + object.name</field>
+        <field name="binding_model_id" ref="school_management.model_school_management_course"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

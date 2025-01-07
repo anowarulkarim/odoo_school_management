@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- School Tree View -->
+        <record id="view_school_tree" model="ir.ui.view">
+            <field name="name">school.management.school.tree</field>
+            <field name="model">school_management.school</field>
+            <field name="arch" type="xml">
+                <tree string="Schools">
+                    <field name="name"/>
+                    <field name="school_code"/>
+                    <field name="address"/>
+                    <field name="contact"/>
+                    <field name="email"/>
+                    <field name="website"/>
+                    <field name="established_date"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- School Form View -->
+        <record id="view_school_form" model="ir.ui.view">
+            <field name="name">school.management.school.form</field>
+            <field name="model">school_management.school</field>
+            <field name="arch" type="xml">
+                <form string="School">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="school_code"/>
+                        </group>
+                        <group>
+                            <field name="address"/>
+                            <field name="contact"/>
+                            <field name="email"/>
+                            <field name="website"/>
+                            <field name="established_date"/>
+                            <field name="active"/>
+                        </group>
+                        <notebook>
+                            <page string="Teachers">
+                                <field name="teacher_ids">
+                                    <tree string="Teachers">
+                                        <field name="name"/>
+                                        <field name="subject"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Students">
+                                <field name="student_ids">
+                                    <tree string="Students">
+                                        <field name="name"/>
+                                        <field name="roll_number"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Playgrounds">
+                                <field name="playground_ids" widget="many2many_tags"/>
+                            </page>
+                            <page string="Swimming Pools">
+                                <field name="swimming_pool_ids" widget="many2many_tags"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Playground Tree View -->
+        <record id="view_playground_tree" model="ir.ui.view">
+            <field name="name">school.management.playground.tree</field>
+            <field name="model">school_management.playground</field>
+            <field name="arch" type="xml">
+                <tree string="Playgrounds">
+                    <field name="name"/>
+                    <field name="location"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Swimming Pool Tree View -->
+        <record id="view_swimming_pool_tree" model="ir.ui.view">
+            <field name="name">school.management.swimming.pool.tree</field>
+            <field name="model">school_management.swimming_pool</field>
+            <field name="arch" type="xml">
+                <tree string="Swimming Pools">
+                    <field name="name"/>
+                    <field name="location"/>
+                    <field name="length"/>
+                    <field name="width"/>
+                    <field name="depth"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- School Action -->
+        <record id="action_school" model="ir.actions.act_window">
+            <field name="name">Schools</field>
+            <field name="res_model">school_management.school</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Playground Action -->
+        <record id="action_playground" model="ir.actions.act_window">
+            <field name="name">Playgrounds</field>
+            <field name="res_model">school_management.playground</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Swimming Pool Action -->
+        <record id="action_swimming_pool" model="ir.actions.act_window">
+            <field name="name">Swimming Pools</field>
+            <field name="res_model">school_management.swimming_pool</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>
