@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Root Menu -->
+    <menuitem id="warranty_tracker_menu_root" name="Warranty Tracker" web_icon="warranty_tracker,static/description/logo.png" sequence="100">
+        <menuitem id="warranty_tracker_warranty_menu"
+              name="Warranty"
+              action="warranty_action"
+              sequence="10"/>
+        <menuitem id="warranty_tracker_warranty_claim"
+          name="Warranty Claim"
+          action="warranty_claim_action"
+          sequence="15"/>
+    </menuitem>
+
+    <!-- Submenus -->
+</odoo>

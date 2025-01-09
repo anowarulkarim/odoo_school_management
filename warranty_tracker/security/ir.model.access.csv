@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_warranty_product,access.warranty.product,model_warranty_product,base.group_user,1,1,1,1
+access_warranty_claim_manager,access.warranty.claim_manager,model_warranty_claim,group_warranty_tracker_manager,1,1,1,1
+access_warranty_claim_user,access.warranty.claim_user,model_warranty_claim,group_warranty_tracker_user,1,0,0,0
+access_maintenance_record,access.maintenance.record,model_maintenance_record,base.group_user,1,1,1,1
+access_employee_project_history,access.employee.project.history,model_employee_project_history,base.group_user,1,1,1,1

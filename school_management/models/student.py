@@ -27,6 +27,8 @@ class Student(models.Model):
     parent_name = fields.Char(related='parent_id.name', string='Parent Name', store=True)
     course_ids= fields.Many2many('school_management.course', string="Course")
     result_ids=fields.One2many('school_management.result','student_id')
+
+
     @api.onchange('weight_in_kg')
     def _onchange_weight_in_kg(self):
         if self.weight_in_kg:
@@ -84,6 +86,5 @@ class Student(models.Model):
             'domain': [('student_id', '=', self.id)],
             'context': {'default_student_id': self.id},
         }
-
 
 

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="warranty_view_tree" model="ir.ui.view">
+        <field name="name">warranty.view.tree</field>
+        <field name="model">warranty.product</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string="Name" width="33%"/>
+                <field name="warranty_claim_ids" string="Issues" options="{'color_field': 'color'}" widget="many2many_tags" width="33%"/>
+                <field name="days_to_expiry" string="warranty Remaining" optional="hide" width="33%"/>
+            </tree>
+        </field>
+    </record>
+    <odoo>
+    <record id="view_warranty_product_form" model="ir.ui.view">
+    <field name="name">warranty.product.form</field>
+    <field name="model">warranty.product</field>
+    <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="serial_number"/>
+                        <field name="purchase_date"/>
+                        <field name="warranty_start_date"/>
+                        <field name="warranty_end_date"/>
+                        <field name="selling_price"/>
+                    </group>
+                    <group>
+                        <field name="discount_price"/>
+                        <field name="offer"/>
+                        <field name="paid_option"/>
+                        <field name="is_expired"/>
+                        <field name="days_to_expiry"/>
+                        <field name="warranty_duration"/>
+                        <field name="product_currency_id"/>
+                    </group>
+                </group>
+
+                <!-- Notebook section -->
+                <notebook>
+                    <page string="Warranty Claims">
+                        <field name="warranty_claim_ids">
+                            <tree editable="bottom">
+                                <field name="description"/>
+                                <field name="claim_date"/>
+                                <field name="status"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Claim Descriptions">
+                        <field name="claim_descriptions" readonly="1"/>
+                    </page>
+                </notebook>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids"/>
+                <field name="activity_ids"/>
+                <field name="message_ids"/>
+            </div>
+        </form>
+    </field>
+</record>
+</odoo>
+
+    <record id="warranty_action" model="ir.actions.act_window">
+        <field name="name">WarrantyProduct</field>
+        <field name="res_model">warranty.product</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+<!--            <notebook>-->
+<!--                        <page string="Warranty Claims">-->
+<!--                            <field name="warranty_claim_ids">-->
+<!--                                <tree editable="bottom">-->
+<!--                                    <field name="product_id"/>-->
+<!--                                    <field name="description"/>-->
+<!--                                </tree>-->
+<!--                            </field>-->
+<!--                        </page>-->
+<!--                        <page string="Claim Descriptions">-->
+<!--                            <field name="claim_descriptions" readonly="1"/>-->
+<!--                        </page>-->
+<!--            </notebook>-->
+            <p class="o_view_nocontent_smiling_face">
+                Create a School
+            </p>
+            <p>
+                Create a School Info
+            </p>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="school_management_result_detail_view" model="ir.ui.view">
+            <field name="name">school.management.result.detail.view</field>
+            <field name="model">school_management.student</field>
+            <field name="inherit_id" ref="school_management.school_management_student_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Result2">
+                        <field name="name"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

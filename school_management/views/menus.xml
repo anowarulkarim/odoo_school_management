@@ -4,8 +4,17 @@
 
     <menuitem id="school_management_student_menu" name="Student" parent="school_management_menu"
               action="school_management_student_action" sequence="10"/>
+
+
+    <menuitem id="school_management_student_detail_menu" name="Student details" parent="school_management_student_menu"
+            action="action_school"
+            
+            sequence="20"/>
+
+
+
     <menuitem id="school_management_school_menu" name="School" parent="school_management_menu"
-              action="action_school" sequence="15"/>
+              action="action_school" sequence="25"/>
 
     <record id="school_management_print_report_action" model="ir.actions.server">
         <field name="name">Print School Details Report</field>
@@ -18,10 +27,10 @@
 
     <!-- Now reference the action in the menu item -->
     <menuitem id="school_management_print_report_menu" name="Details Report"
-              parent="school_management_menu" sequence="20"
+              parent="school_management_menu" sequence="30"
               action="school_management_print_report_action"/>
     <menuitem id="school_management_result_menu" name="Result" parent="school_management_menu"
-              action="action_result" sequence="25"/>
+              action="action_result" sequence="35"/>
 
 
 

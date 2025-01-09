@@ -15,7 +15,13 @@
                             <field name="date_of_birth"/>
                             <field name="image" widget="image" class="oe_avatar"/>
                         </group>
+
                     </sheet>
+                        <notebook>
+                        <page string="Result">
+                            <field name="result_ids" />
+                        </page>
+                        </notebook>
                 </form>
             </field>
         </record>
@@ -42,49 +48,49 @@
             </field>
         </record>
 
-        <record id="school_management_student_simple_form" model="ir.ui.view">
-            <field name="name">school.management.student.simple.form</field>
-            <field name="model">school_management.student</field>
-            <field name="arch" type="xml">
-                <form string="School Student" create="true" edit="true" duplicate="true" delete="true"
-                      disable_autofocus="true">
-                    <sheet>
-                        <group>
-                            <field name="name"/>
-                            <field name="image" widget="image" class="oe_avatar"/>
-                            <field name="roll_number"/>
-                            <field name="standard"/>
-                            <field name="section"/>
-                            <field name="version"/>
-                            <field name="admission_date"/>
-                            <field name="group"/>
-                        </group>
-                        <group>
-                            <field name="weight_in_kg"/>
-                            <field name="weight_in_pounds"/>
-                        </group>
-                        <group>
-                            <field name="parent_id"/>
-                            <field name="parent_name" readonly="1"/>
-                            <field name="school_id"/>
-                        </group>
-                        <!-- Placeholder for course_ids if you have a relation -->
-                        <group>
-                            <field name="course_ids" widget="many2many_tags"/>
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
+<!--        <record id="school_management_student_simple_form" model="ir.ui.view">-->
+<!--            <field name="name">school.management.student.simple.form</field>-->
+<!--            <field name="model">school_management.student</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="School Student" create="true" edit="true" duplicate="true" delete="true"-->
+<!--                      disable_autofocus="true">-->
+<!--                    <sheet>-->
+<!--                        <group>-->
+<!--                            <field name="name"/>-->
+<!--                            <field name="image" widget="image" class="oe_avatar"/>-->
+<!--                            <field name="roll_number"/>-->
+<!--                            <field name="standard"/>-->
+<!--                            <field name="section"/>-->
+<!--                            <field name="version"/>-->
+<!--                            <field name="admission_date"/>-->
+<!--                            <field name="group"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="weight_in_kg"/>-->
+<!--                            <field name="weight_in_pounds"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="parent_id"/>-->
+<!--                            <field name="parent_name" readonly="1"/>-->
+<!--                            <field name="school_id"/>-->
+<!--                        </group>-->
+<!--                        &lt;!&ndash; Placeholder for course_ids if you have a relation &ndash;&gt;-->
+<!--                        <group>-->
+<!--                            <field name="course_ids" widget="many2many_tags"/>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
 
-        <record id="open_create_student" model="ir.actions.act_window">
-            <field name="name">Create a Student</field>
-            <field name="res_model">school_management.student</field>
-            <field name="view_mode">form</field>
-            <field name="view_id" ref="school_management_student_simple_form"/>
-            <field name="target">new</field>
-            <field name="context">{"default_age": 6}</field>
-        </record>
+<!--        <record id="open_create_student" model="ir.actions.act_window">-->
+<!--            <field name="name">Create a Student</field>-->
+<!--            <field name="res_model">school_management.student</field>-->
+<!--            <field name="view_mode">form</field>-->
+<!--            <field name="view_id" ref="school_management_student_simple_form"/>-->
+<!--            <field name="target">new</field>-->
+<!--            <field name="context">{"default_age": 6}</field>-->
+<!--        </record>-->
         <record id="school_management_student_view_kanban" model="ir.ui.view">
             <field name="name">school.management.student.view.kanban</field>
             <field name="model">school_management.student</field>

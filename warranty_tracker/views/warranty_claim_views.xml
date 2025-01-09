@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_warranty_claim_tree" model="ir.ui.view">
+        <field name="name">warranty.claim.tree</field>
+        <field name="model">warranty.claim</field>
+        <field name="arch" type="xml">
+            <tree editable="top" open_form_view="True">
+                <field name="product_id"/>
+                <field name="claim_date"/>
+                <field name="description"/>
+                <field name="status"/>
+<!--                <field name="resolution_date"/>-->
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_warranty_claim_form" model="ir.ui.view">
+        <field name="name">warranty.claim.form</field>
+        <field name="model">warranty.claim</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="show_button" invisible="1"/>
+                <header>
+                    <button name="action_approve" class="oe_highlight" type="object" string="Approve"
+                            invisible="not show_button"/>
+                    <button name="action_reject" class="oe_highlight" type="object" string="Reject"
+                            invisible="not show_button"/>
+                    <button name="action_cancel" class="oe_highlight" type="object" string="Cancel"
+                            invisible="not show_button"/>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="product_id"/>
+                        <field name="claim_date" />
+                        <field name="description"/>
+<!--                        <field name="status"/>-->
+                        <field name="resolution_date"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"> </field>
+                    <field name="activity_ids"> </field>
+                    <field name="message_ids"> </field>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="warranty_claim_action" model="ir.actions.act_window">
+    <field name="name">Warranty Claims</field>
+    <field name="res_model">warranty.claim</field>
+    <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

@@ -6,8 +6,8 @@
             <field name="name">school.management.result.tree</field>
             <field name="model">school_management.result</field>
             <field name="arch" type="xml">
-                <tree string="Results">
-                    <field name="student_id" string="Student"/>
+                <tree string="Results" editable="bottom" open_form_view="True">
+<!--                    <field name="student_id" string="Student"/>-->
                     <field name="course_id" string="Course"/>
                     <field name="grade" string="Grade"/>
                     <field name="marks" string="Marks"/>
@@ -37,76 +37,73 @@
             </field>
         </record>
 
-        <!--         Kanban View -->
         <record id="school_management_result_kanban_view" model="ir.ui.view">
-    <field name="name">school.management.result.kanban.view</field>
-    <field name="model">school_management.result</field>
-    <field name="arch" type="xml">
-        <kanban default_group_by="course_id"
-                default_order="marks desc"
-                records_draggable="false">
-            <field name="student_id"/>
-            <field name="course_id"/>
-            <field name="marks"/>
-            <field name="grade"/>
-            <field name="result_date"/>
-            <templates>
-                <t t-name="kanban-box">
-                    <div class="oe_kanban_global_click">
-                        <div class="o_kanban_image" style="text-align: center; margin-bottom: 10px;">
-                            <img t-att-src="kanban_image('school_management.student', 'image', record.student_id.value)"
-                                 alt="Student Image"
-                                 class="o_image_128"
-                                 style="border-radius: 50%; height: 100px; width: 100px;"/>
-                        </div>
-                        <div style="text-align: center; margin-bottom: 15px;">
-                            <a href="#"
-                               action="school_management_student_view_form"
-                               t-att-data-oe-model="'school_management.student'"
-                               t-att-data-oe-id="record.student_id.value"
-                               style="font-size: 16px; color: #2c3e50; font-weight: bold; text-decoration: underline;"
-                               class="o_open">
-                                <t t-esc="record.student_id.value"/>
-                            </a>
-                        </div>
-                        <div>
-                            <span style="font-size: 14px; color: #34495e;">Course:</span>
-                            <strong t-esc="record.course_id.value" style="color: #2980b9;"/>
-                        </div>
-                        <div>
-                            <span style="font-size: 14px; color: #34495e;">Marks:</span>
-                            <strong t-esc="record.marks.value" style="color: #27ae60;"/>
-                        </div>
-                        <div>
-                            <span style="font-size: 14px; color: #34495e;">Grade:</span>
-                            <strong t-esc="record.grade.value" style="color: #c0392b;"/>
-                        </div>
-                        <div>
-                            <span style="font-size: 14px; color: #34495e;">Date:</span>
-                            <span t-esc="record.result_date.value" style="color: #8e44ad;"/>
-                        </div>
-                    </div>
-                </t>
-                <t t-name="kanban-header">
-                    <div>
-                        <strong t-esc="record.course_id.value" style="font-size: 18px; color: #2c3e50;"/>
-                    </div>
-                </t>
-                <t t-name="kanban-view">
-                    <div>
-                        <div>
-                            <t t-foreach="records" t-as="record">
-                                <t t-call="kanban-box"/>
-                            </t>
-                        </div>
-                    </div>
-                </t>
-            </templates>
-        </kanban>
-    </field>
-</record>
-
-
+            <field name="name">school.management.result.kanban.view</field>
+            <field name="model">school_management.result</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="course_id"
+                        default_order="marks desc"
+                        records_draggable="false">
+                    <field name="student_id"/>
+                    <field name="course_id"/>
+                    <field name="marks"/>
+                    <field name="grade"/>
+                    <field name="result_date"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_image" style="text-align: center; margin-bottom: 10px;">
+                                    <img t-att-src="kanban_image('school_management.student', 'image', record.student_id.value)"
+                                         alt="Student Image"
+                                         class="o_image_128"
+                                         style="border-radius: 50%; height: 100px; width: 100px;"/>
+                                </div>
+                                <div style="text-align: center; margin-bottom: 15px;">
+                                    <a href="#"
+                                       action="school_management_student_view_form"
+                                       t-att-data-oe-model="'school_management.student'"
+                                       t-att-data-oe-id="record.student_id.value"
+                                       style="font-size: 16px; color: #2c3e50; font-weight: bold; text-decoration: underline;"
+                                       class="o_open">
+                                        <t t-esc="record.student_id.value"/>
+                                    </a>
+                                </div>
+                                <div>
+                                    <span style="font-size: 14px; color: #34495e;">Course:</span>
+                                    <strong t-esc="record.course_id.value" style="color: #2980b9;"/>
+                                </div>
+                                <div>
+                                    <span style="font-size: 14px; color: #34495e;">Marks:</span>
+                                    <strong t-esc="record.marks.value" style="color: #27ae60;"/>
+                                </div>
+                                <div>
+                                    <span style="font-size: 14px; color: #34495e;">Grade:</span>
+                                    <strong t-esc="record.grade.value" style="color: #c0392b;"/>
+                                </div>
+                                <div>
+                                    <span style="font-size: 14px; color: #34495e;">Date:</span>
+                                    <span t-esc="record.result_date.value" style="color: #8e44ad;"/>
+                                </div>
+                            </div>
+                        </t>
+                        <t t-name="kanban-header">
+                            <div>
+                                <strong t-esc="record.course_id.value" style="font-size: 18px; color: #2c3e50;"/>
+                            </div>
+                        </t>
+                        <t t-name="kanban-view">
+                            <div>
+                                <div>
+                                    <t t-foreach="records" t-as="record">
+                                        <t t-call="kanban-box"/>
+                                    </t>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
 
         <!-- Action -->
         <record id="action_result" model="ir.actions.act_window">
