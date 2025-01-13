@@ -104,22 +104,53 @@ class SchoolManagement(http.Controller):
                 headers=[('Content-Type', 'application/json')]
             )
 
-    @http.route('/school_management/students', auth='public', website=True,csrf=False)
-    def students(self, **kw):
+    @http.route('/school_management/students', auth='public', website=True, csrf=False)
+    def students(self, page=1, limit=10, **kw):
+        # Ensure page and limit are integers and handle invalid input
+        try:
+            page = int(page)
+            limit = int(limit)
+            if page < 1:
+                page = 1
+            if limit < 1:
+                limit = 10
+        except ValueError:
+            page = 1
+            limit = 10
 
-        students = request.env['school_management.student'].sudo().search([])
+        # Calculate offset based on page and limit
+        offset = (page - 1) * limit
 
+        # Fetch the paginated students
+        students = request.env['school_management.student'].sudo().search([], offset=offset, limit=limit)
+
+        # Fetch the total count of students for pagination info
+        total_students = request.env['school_management.student'].sudo().search_count([])
+
+        # Prepare student data
         students_data = [{
             'id': student.id,
             'name': student.name,
             'age': student.age,
         } for student in students]
 
+        # Include pagination metadata
+        response_data = {
+            'students': students_data,
+            'pagination': {
+                'current_page': page,
+                'limit': limit,
+                'total_students': total_students,
+                'total_pages': (total_students + limit - 1) // limit,  # Ceiling division
+            }
+        }
+
         return request.make_response(
-            json.dumps(students_data),
+            json.dumps(response_data),
             headers=[('Content-Type', 'application/json')]
         )
 
+        
     @http.route('/school_management/add_student', type='json', auth='public', methods=['POST'], csrf=False)
     def add_student(self, **kwargs):
         try:
