@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Calendar View -->
+        <record id="view_course_assignment_calendar" model="ir.ui.view">
+            <field name="name">view.course.assignment.calendar</field>
+            <field name="model">school_management.assignment</field>
+            <field name="arch" type="xml">
+                <calendar string="Assignments" date_start="assign_date" date_stop="last_date" color="course_id">
+                    <field name="title" />
+                    <field name="course_id" />
+                </calendar>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_assignment" model="ir.actions.act_window">
+            <field name="name">Assignment</field>
+            <field name="res_model">school_management.assignment</field>
+            <field name="view_mode">calendar,tree,form</field>
+            <field name="view_id" ref="view_course_assignment_calendar" />
+        </record>
+    </data>
+</odoo>

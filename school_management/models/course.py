@@ -13,6 +13,7 @@ class Course(models.Model):
     teacher_ids = fields.Many2many('school_management.teacher', relation="teachers_courses_rel",
                                    column1='course_id', column2='teacher_id', string='Course Teachers')
     student_ids = fields.Many2many('school_management.student', string='Students')
+    assignments_ids= fields.One2many('school_management.assignment',"course_id",string="assignment")
 
     # Check unique code
     @api.constrains('code')

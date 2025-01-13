@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_teachers_tree" model="ir.ui.view">
+            <field name="name">school_management.teacher.view.tree </field>
+            <field name="model">school_management.teacher</field>
+            <field name="arch" type="xml">
+                <tree string="Teachers">
+                    <field name="name" string="Teachers name"/>
+                    <field name="subject" string="subject"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="action_teacher" model="ir.actions.act_window">
+            <field name="name">Teachers</field>
+            <field name="res_model">school_management.teacher</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>
