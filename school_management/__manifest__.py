@@ -24,6 +24,7 @@
     'data': [
         'security/ir.model.access.csv',
         'data/school_management.student.csv',
+        'data/school_management.school.csv',
         'data/student_data.xml',
         # 'data/course_data.xml',
         # 'data/result_data.xml',
@@ -44,7 +45,7 @@
         'report/certificate.xml',
         'report/transcipt.xml',
         'report/school_report_new.xml',
-        # 'views/templates.xml',
+        'views/templates.xml',
     ],
     # only loaded in demonstration mode
     # 'demo': [
