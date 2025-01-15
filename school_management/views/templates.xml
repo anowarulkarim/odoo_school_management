@@ -3,25 +3,38 @@
         <template id="portal_my_school_home" inherit_id="portal.portal_my_home">
             <xpath expr="//div[@id='portal_vendor_category']" position="inside">
                 <t t-call="portal.portal_docs_entry">
-                    <t t-set="icon" t-value="'/sale/static/src/img/bag.svg'" />
+                    <t t-set="icon" t-value="'/sale/static/src/img/bag.svg'"/>
                     <t t-set="title">School</t>
-                    <t t-set="placeholder_count" t-value="'school_count'" />
+                    <t t-set="placeholder_count" t-value="'school_count'"/>
                     <t t-set="text">My School</t>
-                    <t t-set="url" t-value="'/my/school'" />
-                    <t t-set="config_card" t-value="True" />
+                    <t t-set="url" t-value="'/my/school'"/>
+                    <t t-set="config_card" t-value="True"/>
                 </t>
             </xpath>
         </template>
         <template id="portal_my_home_supplier_registration_breadcrumbs"
-            name="Portal layout : School menu breadcrumbs"
-            inherit_id="portal.portal_breadcrumbs" priority="25">
+                  name="Portal layout : School menu breadcrumbs"
+                  inherit_id="portal.portal_breadcrumbs" priority="25">
             <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
-                <li t-if="page_name == 'my_school'" class="breadcrumb-item">School</li>
+                <!--                <li t-if="page_name == 'my_school'" class="breadcrumb-item">School</li>-->
+                <li t-if="page_name == 'my_school'" class="breadcrumb-item">
+                    <a t-att-href="'/my/school'">
+                        <t>My School</t>
+                    </a>
+                </li>
+                <li t-if="page_name == 'school_details'" class="breadcrumb-item">
+                    <a t-att-href="'/my/school'">
+                        <t t-esc="school.name"/>
+                    </a>
+                </li>
             </xpath>
         </template>
 
         <template id="school_list_view_template">
             <t t-call="portal.portal_layout">
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">School</t>
+                </t>
                 <div class="container mt-5">
                     <div class="row justify-content-center">
                         <div class="col-md-10">
@@ -29,7 +42,8 @@
                             <!-- <a t-attf-href="/my/school/#{school.id}">
                                                     <t t-esc="school.name"/>
                                                 </a> -->
-                            <table class="table table-striped table-hover">
+                            <!--                            <table class="table table-striped table-hover">-->
+                            <t t-call="portal.portal_table">
                                 <thead style="background-color: #4A90E2; color: #fff;">
                                     <tr>
                                         <th style="width: 20%;">Name</th>
@@ -44,55 +58,70 @@
                                         <tr>
                                             <td>
                                                 <a t-attf-href="/my/school/#{school.id}">
-                                                    <t t-esc="school.name" />
+                                                    <t t-esc="school.name"/>
                                                 </a>
                                             </td>
                                             <td>
-                                                <t t-esc="school.address" />
+                                                <t t-esc="school.address"/>
                                             </td>
                                             <td>
-                                                <t t-esc="school.contact" />
+                                                <t t-esc="school.contact"/>
                                             </td>
                                             <td>
-                                                <t t-esc="school.email" />
+                                                <t t-esc="school.email"/>
                                             </td>
                                             <td>
-                                                <a
-                                                    t-att-href="'http://' + school.website if school.website else '#'"
-                                                    target="_blank">
-                                                    <t t-esc="school.website or 'N/A'" />
+                                                <a t-att-href="'http://' + school.website if school.website else '#'"
+                                                   target="_blank">
+                                                    <t t-esc="school.website or 'N/A'"/>
                                                 </a>
                                             </td>
                                         </tr>
                                     </t>
                                 </tbody>
-                            </table>
+                            </t>
                         </div>
                     </div>
                 </div>
             </t>
         </template>
-
         <template id="school_student_view" name="Student List View">
             <t t-call="portal.portal_layout">
                 <div class="container mt-5">
-                <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="/">Home</a> <!-- Adjust this link to your home page -->
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a href="/my/school">Schools</a> <!-- Link to the list of schools -->
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">
-                        Student List
-                    </li>
-                </ol>
-            </nav>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="/my/school">Schools</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Student List</li>
+                        </ol>
+                    </nav>
                     <div class="row justify-content-center">
                         <div class="col-md-10">
-                            <h1 class="text-center mb-4">Student List</h1>
-                            <table class="table table-striped table-hover">
+                            <h1 class="text-center mb-4">Students of
+                                <t t-esc="school.name"/>
+                            </h1>
+                            <!-- Search Bar -->
+                            <form method="GET" action="">
+                                <div class="d-flex mb-3">
+                                    <input type="text" class="form-control" name="search"
+                                           placeholder="Search students..." t-att-value="search"/>
+                                    <select class="form-control ms-2" name="search_in">
+                                        <option t-att-selected="search_in == 'name'" value="name">Search by Name
+                                        </option>
+                                        <option t-att-selected="search_in == 'roll_number'" value="roll_number">Search
+                                            by Roll Number
+                                        </option>
+                                    </select>
+                                    <button class="btn btn-primary ms-2" type="submit">Search</button>
+                                </div>
+                            </form>
+
+                            <!-- Students Table -->
+                            <t t-call="portal.portal_table">
                                 <thead>
                                     <tr>
                                         <th>Image</th>
@@ -100,71 +129,35 @@
                                         <th>Roll Number</th>
                                         <th>Standard</th>
                                         <th>Section</th>
-                                        <th>Version</th>
-                                        <th>Admission Date</th>
-                                        <th>Group</th>
-                                        <th>Weight (kg)</th>
-                                        <th>Parent Name</th>
-                                        <th>Courses</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <t t-foreach="students" t-as="student">
                                         <tr>
-                                            <!-- Display Image -->
                                             <td>
                                                 <t t-if="student.image">
-                                                    <img
-                                                        t-att-src="'/web/image/school_management.student/%s/image' % student.id"
-                                                        alt="Student Image" class="img-thumbnail"
-                                                        style="max-width: 50px;" />
-                                                </t>
-                                                <t t-else="">
-                                                    <span>No Image</span>
+                                                    <img t-att-src="'/web/image/school_management.student/%s/image' % student.id"
+                                                         alt="Student Image" class="img-thumbnail"
+                                                         style="max-width: 50px;"/>
                                                 </t>
                                             </td>
-                                            <!-- Display Other Fields -->
                                             <td>
-                                                <t t-esc="student.name" />
+                                                <t t-esc="student.name"/>
                                             </td>
                                             <td>
-                                                <t t-esc="student.roll_number" />
+                                                <t t-esc="student.roll_number"/>
                                             </td>
                                             <td>
-                                                <t t-esc="student.standard" />
+                                                <t t-esc="student.standard"/>
                                             </td>
                                             <td>
-                                                <t t-esc="student.section" />
-                                            </td>
-                                            <td>
-                                                <t t-esc="student.version" />
-                                            </td>
-                                            <td>
-                                                <t t-esc="student.admission_date" />
-                                            </td>
-                                            <td>
-                                                <t t-esc="student.group" />
-                                            </td>
-                                            <td>
-                                                <t t-esc="student.weight_in_kg" />
-                                            </td>
-                                            <td>
-                                                <t t-esc="student.parent_name" />
-                                            </td>
-                                            <!-- Display Courses -->
-                                            <td>
-                                                <ul>
-                                                    <t t-foreach="student.course_ids" t-as="course">
-                                                        <li>
-                                                            <t t-esc="course.name" />
-                                                        </li>
-                                                    </t>
-                                                </ul>
+                                                <t t-esc="student.section"/>
                                             </td>
                                         </tr>
                                     </t>
                                 </tbody>
-                            </table>
+                            </t>
+
                         </div>
                     </div>
                 </div>
@@ -176,11 +169,12 @@
             <xpath expr="//li[@class='breadcrumb-item ms-1']" position="after">
                 <li t-if="page_name == 'school_details' " class="breadcrumb-item">
                     <a href="/my/school" aria-label="Student Details" title="Student Details">School
-                        Details</a>
+                        Details
+                    </a>
                 </li>
                 <li t-if="page_name == 'school_details'and current_school_id "
                     class="breadcrumb-item">
-                    <span t-esc="school.name" />
+                    <span t-esc="school.name"/>
                 </li>
             </xpath>
         </template>
@@ -196,41 +190,43 @@
                                         <div class="card-body text-center">
                                             <t t-if="school.image">
                                                 <img t-att-src="image_data_uri(school.image)"
-                                                    class="rounded-circle img-fluid"
-                                                    style="width: 100%;" />
+                                                     class="rounded-circle img-fluid"
+                                                     style="width: 100%;"/>
                                             </t>
                                             <t t-else="">
                                                 <img
-                                                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-                                                    alt="avatar"
-                                                    class="rounded-circle img-fluid"
-                                                    style="width: 150px;" />
+                                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                                                        alt="avatar"
+                                                        class="rounded-circle img-fluid"
+                                                        style="width: 150px;"/>
                                             </t>
                                             <h5 class="my-3">
-                                                <span t-esc="school.name" />
+                                                <span t-esc="school.name"/>
                                             </h5>
                                             <p class="text-muted mb-1">
-                                                <span t-esc="school.email" />
+                                                <span t-esc="school.email"/>
                                             </p>
                                             <p class="text-muted mb-4">
-                                                <span t-esc="school.website" />
+                                                <span t-esc="school.website"/>
                                             </p>
-                                            
+
                                             <div class="d-flex justify-content-center mb-2">
-                                            <!-- <button
-                                                    type="button"
-                                                    class="btn btn-primary">Follow
-                                                </button>
-                                                <a
-                                                    t-att-href="'/web#id=%s&amp;model=school_management.school&amp;view_type=form' % school.id"
-                                                    class="btn btn-primary">School Details
+                                                <!-- <button
+                                                        type="button"
+                                                        class="btn btn-primary">Follow
+                                                    </button>
+                                                    <a
+                                                        t-att-href="'/web#id=%s&amp;model=school_management.school&amp;view_type=form' % school.id"
+                                                        class="btn btn-primary">School Details
+                                                    </a>
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-outline-primary ms-1">Message
+                                                    </button> -->
+                                                <a t-attf-href="/my/school/student/#{school.id}"
+                                                   class="btn btn-primary btn-lg">View Student Details
                                                 </a>
-                                                <button
-                                                    type="button"
-                                                    class="btn btn-outline-primary ms-1">Message
-                                                </button> -->
-                                                <a t-attf-href="/my/school/student/#{school.id}" class="btn btn-primary btn-lg">View Student Details</a>
-                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -242,54 +238,54 @@
                                                     <p class="mb-0">School Name</p>
                                                 </div>
                                                 <div class="col-sm-9">
-                                                    <p t-esc="school.name" />
+                                                    <p t-esc="school.name"/>
                                                 </div>
                                             </div>
-                                            <hr />
+                                            <hr/>
                                             <div class="row">
                                                 <div class="col-sm-3">
                                                     <p class="mb-0">School Email</p>
                                                 </div>
                                                 <div class="col-sm-9">
-                                                    <p t-esc="school.email" />
+                                                    <p t-esc="school.email"/>
                                                 </div>
                                             </div>
-                                            <hr />
+                                            <hr/>
                                             <div class="row">
                                                 <div class="col-sm-3">
                                                     <p class="mb-0">Website</p>
                                                 </div>
                                                 <div class="col-sm-9">
-                                                    <p t-esc="school.website" />
+                                                    <p t-esc="school.website"/>
                                                 </div>
                                             </div>
-                                            <hr />
+                                            <hr/>
                                             <div class="row">
                                                 <div class="col-sm-3">
                                                     <p class="mb-0">Address</p>
                                                 </div>
                                                 <div class="col-sm-9">
-                                                    <p t-esc="school.address" />
+                                                    <p t-esc="school.address"/>
                                                 </div>
                                             </div>
-                                            <hr />
+                                            <hr/>
                                             <div class="row">
                                                 <div class="col-sm-3">
                                                     <p class="mb-0">Contact</p>
                                                 </div>
                                                 <div class="col-sm-9">
-                                                    <p t-esc="school.contact" />
+                                                    <p t-esc="school.contact"/>
                                                 </div>
                                             </div>
-                                            <hr />
+                                            <hr/>
                                             <div class="row">
                                                 <div class="col-sm-3">
                                                     <p class="mb-0">Total Student</p>
                                                 </div>
                                                 <div class="col-sm-9">
                                                     <!-- <p t-esc="total" /> -->
-                                                    <t t-set="total_students" t-value="len(school.student_ids)" />
-                                                    <t t-out="total_students" />
+                                                    <t t-set="total_students" t-value="len(school.student_ids)"/>
+                                                    <t t-out="total_students"/>
                                                 </div>
                                             </div>
                                         </div>
