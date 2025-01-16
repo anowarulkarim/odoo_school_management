@@ -12,6 +12,7 @@ class Playground(models.Model):
     type = fields.Selection([('indoor', 'Indoor'), ('outdoor', 'Outdoor')], default='outdoor')
 
 
+
 class SwimmingPool(models.Model):
     _name = 'school_management.swimming_pool'
     _description = 'Swimming Pool'
@@ -41,6 +42,11 @@ class School(models.Model):
     playground_ids = fields.Many2many('school_management.playground', string='Playgrounds')
     swimming_pool_ids = fields.Many2many('school_management.swimming_pool', 'school_id', string='Swimming Pools')
     image = fields.Binary()
+
+    location = fields.Char()
+    school_type = fields.Selection([('primary', 'Primary'), ('secondary', 'Secondary'), ('higher_secondary', 'Higher Secondary')], default='primary')
+
+    country_id = fields.Many2one('res.country', 'Country')
 
     def print_school_report(self):
         return self.env.ref('school_management.school_management_school_report_action').report_action(self)
@@ -79,6 +85,8 @@ class School(models.Model):
     #     return self.env.ref('school_management.school_management_school_details_report_action').report_action(
     #         self, data=data
     #     )
+    def _get_report_base_filename(self):
+        return self.name
 
     def print_school_details_report(self):
         data1 = {

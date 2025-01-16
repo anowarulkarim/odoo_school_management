@@ -28,6 +28,10 @@ class Student(models.Model):
     course_ids= fields.Many2many('school_management.course', string="Course")
     result_ids=fields.One2many('school_management.result','student_id')
 
+    email = fields.Char()
+
+    def send_email(self):
+        self.env.ref('school_management.student_email_template').send_mail(self.id, force_send=True)
 
     @api.onchange('weight_in_kg')
     def _onchange_weight_in_kg(self):
@@ -86,5 +90,3 @@ class Student(models.Model):
             'domain': [('student_id', '=', self.id)],
             'context': {'default_student_id': self.id},
         }
-
-
