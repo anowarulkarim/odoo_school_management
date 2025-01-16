@@ -221,3 +221,53 @@ class MySchoolPortal(CustomerPortal):
             'search': search,
             'school': school,
         })
+
+
+
+    @http.route(['/my/student/edit/<int:student_id>'], type='http' , auth='user',methods=['POST', 'GET'],website=True)
+    def edit_student(self,student_id,**kw):
+        
+        if request.httprequest.method == 'POST':
+            # Get the submitted data from the form
+            print(kw)
+            name = kw.get('name')
+            email = kw.get('email')
+            section = kw.get('section')
+            version = kw.get('version')
+            admission_date = kw.get('admission_date')
+            group = kw.get('group')
+            weight_in_kg = kw.get('weight_in_kg')
+            weight_in_pounds = kw.get('weight_in_pounds')
+
+            # Fetch the student record to be updated
+            student = request.env['school_management.student'].sudo().browse(student_id)
+            print(student)
+            if student.exists():
+                # Update the student's record with the new values
+                student.write({
+                    'name': name,
+                    'email': email,
+                    'section': section,
+                    'version': version,
+                    'admission_date': admission_date,
+                    'group': group,
+                    'weight_in_kg': float(weight_in_kg) if weight_in_kg else 0.0,
+                    'weight_in_pounds': float(weight_in_pounds) if weight_in_pounds else 0.0,
+                })
+                return None
+
+            # If student doesn't exist, you can return an error page or message
+            return request.render('school_management.student_edit_template', {
+                'error': 'Student not found',
+                'student': student,
+            })
+
+        # Handling GET request to render the edit form
+        student = request.env['school_management.student'].sudo().browse(student_id)
+        if student.exists():
+            return request.render('school_management.student_edit_template', {
+                'student': student,
+            })
+        return request.render('school_management.student_edit_template', {
+            'error': 'Student not found',
+        })

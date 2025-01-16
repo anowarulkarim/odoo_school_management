@@ -3,38 +3,38 @@
         <template id="portal_my_school_home" inherit_id="portal.portal_my_home">
             <xpath expr="//div[@id='portal_vendor_category']" position="inside">
                 <t t-call="portal.portal_docs_entry">
-                    <t t-set="icon" t-value="'/sale/static/src/img/bag.svg'"/>
+                    <t t-set="icon" t-value="'/sale/static/src/img/bag.svg'" />
                     <t t-set="title">School</t>
-                    <t t-set="placeholder_count" t-value="'school_count'"/>
+                    <t t-set="placeholder_count" t-value="'school_count'" />
                     <t t-set="text">My School</t>
-                    <t t-set="url" t-value="'/my/school'"/>
-                    <t t-set="config_card" t-value="True"/>
+                    <t t-set="url" t-value="'/my/school'" />
+                    <t t-set="config_card" t-value="True" />
                 </t>
             </xpath>
             <xpath expr="//div[@id='portal_vendor_category']" position="inside">
                 <t t-call="portal.portal_docs_entry">
-                    <t t-set="icon" t-value="'/sale/static/src/img/bag.svg'"/>
+                    <t t-set="icon" t-value="'/sale/static/src/img/bag.svg'" />
                     <t t-set="title">Create School</t>
-                    <t t-set="placeholder_count" t-value="'school_count'"/>
+                    <t t-set="placeholder_count" t-value="'school_count'" />
                     <t t-set="text">My School</t>
-                    <t t-set="url" t-value="'/my/school/create'"/>
-                    <t t-set="config_card" t-value="True"/>
+                    <t t-set="url" t-value="'/my/school/create'" />
+                    <t t-set="config_card" t-value="True" />
                 </t>
             </xpath>
-             <xpath expr="//div[@id='portal_vendor_category']" position="inside">
+            <xpath expr="//div[@id='portal_vendor_category']" position="inside">
                 <t t-call="portal.portal_docs_entry">
-                    <t t-set="icon" t-value="'/sale/static/src/img/bag.svg'"/>
+                    <t t-set="icon" t-value="'/sale/static/src/img/bag.svg'" />
                     <t t-set="title">Create student</t>
-                    <t t-set="placeholder_count" t-value="'school_count'"/>
+                    <t t-set="placeholder_count" t-value="'school_count'" />
                     <t t-set="text">My School</t>
-                    <t t-set="url" t-value="'/my/student/create'"/>
-                    <t t-set="config_card" t-value="True"/>
+                    <t t-set="url" t-value="'/my/student/create'" />
+                    <t t-set="config_card" t-value="True" />
                 </t>
             </xpath>
         </template>
         <template id="portal_my_home_supplier_registration_breadcrumbs"
-                  name="Portal layout : School menu breadcrumbs"
-                  inherit_id="portal.portal_breadcrumbs" priority="25">
+            name="Portal layout : School menu breadcrumbs"
+            inherit_id="portal.portal_breadcrumbs" priority="25">
             <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
                 <!--                <li t-if="page_name == 'my_school'" class="breadcrumb-item">School</li>-->
                 <li t-if="page_name == 'my_school'" class="breadcrumb-item">
@@ -44,7 +44,7 @@
                 </li>
                 <li t-if="page_name == 'school_details'" class="breadcrumb-item">
                     <a t-att-href="'/my/school'">
-                        <t t-esc="school.name"/>
+                        <t t-esc="school.name" />
                     </a>
                 </li>
                 <li t-if="page_name == 'create_school'" class="breadcrumb-item">
@@ -84,22 +84,23 @@
                                             <tr>
                                                 <td>
                                                     <a t-attf-href="/my/school/#{school.id}">
-                                                        <t t-esc="school.name"/>
+                                                        <t t-esc="school.name" />
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <t t-esc="school.address"/>
+                                                    <t t-esc="school.address" />
                                                 </td>
                                                 <td>
-                                                    <t t-esc="school.contact"/>
+                                                    <t t-esc="school.contact" />
                                                 </td>
                                                 <td>
-                                                    <t t-esc="school.email"/>
+                                                    <t t-esc="school.email" />
                                                 </td>
                                                 <td>
-                                                    <a t-if="school.website" t-att-href="'http://' + school.website"
-                                                       target="_blank">
-                                                        <t t-esc="school.website"/>
+                                                    <a t-if="school.website"
+                                                        t-att-href="'http://' + school.website"
+                                                        target="_blank">
+                                                        <t t-esc="school.website" />
                                                     </a>
                                                     <t t-else="">
                                                         <span>No website</span>
@@ -131,18 +132,19 @@
                     </nav>
                     <div class="row justify-content-center">
                         <div class="col-md-10">
-                            <h1 class="text-center mb-4">Students of
-                                <t t-esc="school.name"/>
+                            <h1 class="text-center mb-4">Students of <t t-esc="school.name" />
                             </h1>
                             <!-- Search Bar -->
                             <form method="GET" action="">
                                 <div class="d-flex mb-3">
                                     <input type="text" class="form-control" name="search"
-                                           placeholder="Search students..." t-att-value="search"/>
+                                        placeholder="Search students..." t-att-value="search" />
                                     <select class="form-control ms-2" name="search_in">
-                                        <option t-att-selected="search_in == 'name'" value="name">Search by Name
+                                        <option t-att-selected="search_in == 'name'" value="name">Search
+                                            by Name
                                         </option>
-                                        <option t-att-selected="search_in == 'roll_number'" value="roll_number">Search
+                                        <option t-att-selected="search_in == 'roll_number'"
+                                            value="roll_number">Search
                                             by Roll Number
                                         </option>
                                     </select>
@@ -159,6 +161,7 @@
                                         <th>Roll Number</th>
                                         <th>Standard</th>
                                         <th>Section</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -166,22 +169,36 @@
                                         <tr>
                                             <td>
                                                 <t t-if="student.image">
-                                                    <img t-att-src="'/web/image/school_management.student/%s/image' % student.id"
-                                                         alt="Student Image" class="img-thumbnail"
-                                                         style="max-width: 50px;"/>
+                                                    <img
+                                                        t-att-src="'/web/image/school_management.student/%s/image' % student.id"
+                                                        alt="Student Image" class="img-thumbnail"
+                                                        style="max-width: 50px;" />
                                                 </t>
                                             </td>
                                             <td>
-                                                <t t-esc="student.name"/>
+                                                <t t-esc="student.name" />
                                             </td>
                                             <td>
-                                                <t t-esc="student.roll_number"/>
+                                                <t t-esc="student.roll_number" />
                                             </td>
                                             <td>
-                                                <t t-esc="student.standard"/>
+                                                <t t-esc="student.standard" />
                                             </td>
                                             <td>
-                                                <t t-esc="student.section"/>
+                                                <t t-esc="student.section" />
+                                            </td>
+                                            <td>
+                                                <a t-attf-href="/my/student/edit/{{student.id}}"
+                                                    aria-label="Student Details"
+                                                    title="Student Details">
+                                                    Delete
+                                                </a>
+
+                                                <a t-attf-href="/my/student/edit/{{student.id}}"
+                                                    aria-label="Student Details"
+                                                    title="Student Details">
+                                                    Edit
+                                                </a>
                                             </td>
                                         </tr>
                                     </t>
@@ -204,7 +221,7 @@
                 </li>
                 <li t-if="page_name == 'school_details'and current_school_id "
                     class="breadcrumb-item">
-                    <span t-esc="school.name"/>
+                    <span t-esc="school.name" />
                 </li>
             </xpath>
         </template>
@@ -220,24 +237,24 @@
                                         <div class="card-body text-center">
                                             <t t-if="school.image">
                                                 <img t-att-src="image_data_uri(school.image)"
-                                                     class="rounded-circle img-fluid"
-                                                     style="width: 100%;"/>
+                                                    class="rounded-circle img-fluid"
+                                                    style="width: 100%;" />
                                             </t>
                                             <t t-else="">
                                                 <img
-                                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-                                                        alt="avatar"
-                                                        class="rounded-circle img-fluid"
-                                                        style="width: 150px;"/>
+                                                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                                                    alt="avatar"
+                                                    class="rounded-circle img-fluid"
+                                                    style="width: 150px;" />
                                             </t>
                                             <h5 class="my-3">
-                                                <span t-esc="school.name"/>
+                                                <span t-esc="school.name" />
                                             </h5>
                                             <p class="text-muted mb-1">
-                                                <span t-esc="school.email"/>
+                                                <span t-esc="school.email" />
                                             </p>
                                             <p class="text-muted mb-4">
-                                                <span t-esc="school.website"/>
+                                                <span t-esc="school.website" />
                                             </p>
 
                                             <div class="d-flex justify-content-center mb-2">
@@ -254,9 +271,11 @@
                                                         class="btn btn-outline-primary ms-1">Message
                                                     </button> -->
                                                 <a t-attf-href="/my/school/student/#{school.id}"
-                                                   class="btn btn-primary btn-lg">View Student Details
+                                                    class="btn btn-primary btn-lg">View Student
+                                                    Details
                                                 </a>
-                                                <a t-attf-href="/my/school/print/{{school.id}}" class="fa fa-download">
+                                                <a t-attf-href="/my/school/print/{{school.id}}"
+                                                    class="fa fa-download">
                                                     Download
                                                 </a>
                                             </div>
@@ -271,54 +290,55 @@
                                                     <p class="mb-0">School Name</p>
                                                 </div>
                                                 <div class="col-sm-9">
-                                                    <p t-esc="school.name"/>
+                                                    <p t-esc="school.name" />
                                                 </div>
                                             </div>
-                                            <hr/>
+                                            <hr />
                                             <div class="row">
                                                 <div class="col-sm-3">
                                                     <p class="mb-0">School Email</p>
                                                 </div>
                                                 <div class="col-sm-9">
-                                                    <p t-esc="school.email"/>
+                                                    <p t-esc="school.email" />
                                                 </div>
                                             </div>
-                                            <hr/>
+                                            <hr />
                                             <div class="row">
                                                 <div class="col-sm-3">
                                                     <p class="mb-0">Website</p>
                                                 </div>
                                                 <div class="col-sm-9">
-                                                    <p t-esc="school.website"/>
+                                                    <p t-esc="school.website" />
                                                 </div>
                                             </div>
-                                            <hr/>
+                                            <hr />
                                             <div class="row">
                                                 <div class="col-sm-3">
                                                     <p class="mb-0">Address</p>
                                                 </div>
                                                 <div class="col-sm-9">
-                                                    <p t-esc="school.address"/>
+                                                    <p t-esc="school.address" />
                                                 </div>
                                             </div>
-                                            <hr/>
+                                            <hr />
                                             <div class="row">
                                                 <div class="col-sm-3">
                                                     <p class="mb-0">Contact</p>
                                                 </div>
                                                 <div class="col-sm-9">
-                                                    <p t-esc="school.contact"/>
+                                                    <p t-esc="school.contact" />
                                                 </div>
                                             </div>
-                                            <hr/>
+                                            <hr />
                                             <div class="row">
                                                 <div class="col-sm-3">
                                                     <p class="mb-0">Total Student</p>
                                                 </div>
                                                 <div class="col-sm-9">
                                                     <!-- <p t-esc="total" /> -->
-                                                    <t t-set="total_students" t-value="len(school.student_ids)"/>
-                                                    <t t-out="total_students"/>
+                                                    <t t-set="total_students"
+                                                        t-value="len(school.student_ids)" />
+                                                    <t t-out="total_students" />
                                                 </div>
                                             </div>
                                         </div>
@@ -341,13 +361,15 @@
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <h1 class="text-center mb-4">Create School</h1>
-                            <form action="/my/school/create" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <form action="/my/school/create" method="post"
+                                enctype="multipart/form-data">
+                                <input type="hidden" name="csrf_token"
+                                    t-att-value="request.csrf_token()" />
                                 <div class="mb-3">
                                     <label for="name" class="form-label">School Name</label>
 
                                     <input type="text" class="form-control" id="name" name="name"
-                                    placeholder="Enter school name"/>
+                                        placeholder="Enter school name" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="country_id" class="form-label">Country</label>
@@ -355,30 +377,33 @@
                                         <option value="">Select Country</option>
                                         <t t-foreach="countries" t-as="country">
                                             <option t-att-value="country.id">
-                                                <t t-esc="country.name"/>
+                                                <t t-esc="country.name" />
                                             </option>
                                         </t>
                                     </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email"/>
+                                    <input type="email" class="form-control" id="email" name="email" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="website" class="form-label">Website</label>
-                                    <input type="text" class="form-control" id="website" name="website"/>
+                                    <input type="text" class="form-control" id="website"
+                                        name="website" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="address" class="form-label">Address</label>
-                                    <input type="text" class="form-control" id="address" name="address"/>
+                                    <input type="text" class="form-control" id="address"
+                                        name="address" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="contact" class="form-label">Contact</label>
-                                    <input type="text" class="form-control" id="contact" name="contact"/>
+                                    <input type="text" class="form-control" id="contact"
+                                        name="contact" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="image" class="form-label">Image</label>
-                                    <input type="file" class="form-control" id="image" name="image"/>
+                                    <input type="file" class="form-control" id="image" name="image" />
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
@@ -388,109 +413,127 @@
             </t>
         </template>
         <template id="create_student_form">
-    <t t-call="portal.portal_layout">
-        <t t-call="portal.portal_searchbar">
-            <t t-set="title">Create Student</t>
-        </t>
-        <div class="container mt-5">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <h1 class="text-center mb-4">Create Student</h1>
-                    <form action="/my/student/create" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+            <t t-call="portal.portal_layout">
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">Create Student</t>
+                </t>
+                <div class="container mt-5">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <h1 class="text-center mb-4">Create Student</h1>
+                            <form action="/my/student/create" method="post"
+                                enctype="multipart/form-data">
+                                <input type="hidden" name="csrf_token"
+                                    t-att-value="request.csrf_token()" />
 
-                        <!-- Name Field -->
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Student Name</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter student name" />
+                                <!-- Name Field -->
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Student Name</label>
+                                    <input type="text" class="form-control" id="name" name="name"
+                                        placeholder="Enter student name" />
+                                </div>
+
+                                <!-- Roll Number Field -->
+                                <div class="mb-3">
+                                    <label for="roll_number" class="form-label">Roll Number</label>
+                                    <input type="text" class="form-control" id="roll_number"
+                                        name="roll_number" placeholder="Enter roll number" />
+                                </div>
+
+                                <!-- Standard Field -->
+                                <div class="mb-3">
+                                    <label for="standard" class="form-label">Standard</label>
+                                    <select class="form-select" id="standard" name="standard">
+                                        <option value="">Select Standard</option>
+                                        <t
+                                            t-foreach="[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'), ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10')]"
+                                            t-as="std">
+                                            <option t-att-value="std[0]">
+                                                <t t-esc="std[1]" />
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+
+                                <!-- Section Field -->
+                                <div class="mb-3">
+                                    <label for="section" class="form-label">Section</label>
+                                    <select class="form-select" id="section" name="section">
+                                        <option value="">Select Section</option>
+                                        <t
+                                            t-foreach="[('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D'), ('E', 'E'), ('F', 'F')]"
+                                            t-as="sec">
+                                            <option t-att-value="sec[0]">
+                                                <t t-esc="sec[1]" />
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+
+                                <!-- School Field -->
+                                <div class="mb-3">
+                                    <label for="school_id" class="form-label">School</label>
+                                    <select class="form-select" id="school_id" name="school_id">
+                                        <option value="">Select School</option>
+                                        <t t-foreach="schools" t-as="school">
+                                            <option t-att-value="school.id">
+                                                <t t-esc="school.name" />
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+
+                                <!-- Email Field -->
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        placeholder="Enter email" />
+                                </div>
+
+                                <!-- Image Field -->
+                                <div class="mb-3">
+                                    <label for="image" class="form-label">Image</label>
+                                    <input type="file" class="form-control" id="image" name="image" />
+                                </div>
+
+                                <!-- Admission Date Field -->
+                                <div class="mb-3">
+                                    <label for="admission_date" class="form-label">Admission Date</label>
+                                    <input type="date" class="form-control" id="admission_date"
+                                        name="admission_date" />
+                                </div>
+
+                                <!-- Parent Field -->
+                                <div class="mb-3">
+                                    <label for="parent_id" class="form-label">Parent</label>
+                                    <select class="form-select" id="parent_id" name="parent_id">
+                                        <option value="">Select Parent</option>
+                                        <t t-foreach="parents" t-as="parent">
+                                            <option t-att-value="parent.id">
+                                                <t t-esc="parent.name" />
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
                         </div>
-
-                        <!-- Roll Number Field -->
-                        <div class="mb-3">
-                            <label for="roll_number" class="form-label">Roll Number</label>
-                            <input type="text" class="form-control" id="roll_number" name="roll_number" placeholder="Enter roll number" />
-                        </div>
-
-                        <!-- Standard Field -->
-                        <div class="mb-3">
-                            <label for="standard" class="form-label">Standard</label>
-                            <select class="form-select" id="standard" name="standard" >
-                                <option value="">Select Standard</option>
-                                <t t-foreach="[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'), ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10')]" t-as="std">
-                                    <option t-att-value="std[0]"><t t-esc="std[1]"/></option>
-                                </t>
-                            </select>
-                        </div>
-
-                        <!-- Section Field -->
-                        <div class="mb-3">
-                            <label for="section" class="form-label">Section</label>
-                            <select class="form-select" id="section" name="section" >
-                                <option value="">Select Section</option>
-                                <t t-foreach="[('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D'), ('E', 'E'), ('F', 'F')]" t-as="sec">
-                                    <option t-att-value="sec[0]"><t t-esc="sec[1]"/></option>
-                                </t>
-                            </select>
-                        </div>
-
-                        <!-- School Field -->
-                        <div class="mb-3">
-                            <label for="school_id" class="form-label">School</label>
-                            <select class="form-select" id="school_id" name="school_id" >
-                                <option value="">Select School</option>
-                                <t t-foreach="schools" t-as="school">
-                                    <option t-att-value="school.id"><t t-esc="school.name"/></option>
-                                </t>
-                            </select>
-                        </div>
-
-                        <!-- Email Field -->
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"/>
-                        </div>
-
-                        <!-- Image Field -->
-                        <div class="mb-3">
-                            <label for="image" class="form-label">Image</label>
-                            <input type="file" class="form-control" id="image" name="image"/>
-                        </div>
-
-                        <!-- Admission Date Field -->
-                        <div class="mb-3">
-                            <label for="admission_date" class="form-label">Admission Date</label>
-                            <input type="date" class="form-control" id="admission_date" name="admission_date"/>
-                        </div>
-
-                        <!-- Parent Field -->
-                        <div class="mb-3">
-                            <label for="parent_id" class="form-label">Parent</label>
-                            <select class="form-select" id="parent_id" name="parent_id">
-                                <option value="">Select Parent</option>
-                                <t t-foreach="parents" t-as="parent">
-                                    <option t-att-value="parent.id"><t t-esc="parent.name"/></option>
-                                </t>
-                            </select>
-                        </div>
-
-                        <!-- Submit Button -->
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </t>
-</template>
+            </t>
+        </template>
         <template id="create_student_success_form">
-    <t t-call="portal.portal_layout">
-        <div class="container mt-5 text-center">
-            <h1>Student Created Successfully!</h1>
-            <p>Your student has been added to the system.</p>
-            <a href="/my/students" class="btn btn-primary">View All Students</a>
-        </div>
-    </t>
-</template>
-                <template id="create_school_success_form">
+            <t t-call="portal.portal_layout">
+                <div class="container mt-5 text-center">
+                    <h1>Student Created Successfully!</h1>
+                    <p>Your student has been added to the system.</p>
+                    <a href="/my/students" class="btn btn-primary">View All Students</a>
+                </div>
+            </t>
+        </template>
+        <template id="create_school_success_form">
             <t t-call="portal.portal_layout">
                 <t t-call="portal.portal_searchbar">
                     <t t-set="title">Create School</t>
@@ -507,5 +550,115 @@
                 </div>
             </t>
         </template>
+
+        <template id="student_edit_template" name="Student edit View">
+            <t t-call="portal.portal_layout">
+                <div class="container mt-5">
+                    <!-- <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="/my/school">Schools</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Student List</li>
+                        </ol>
+                    </nav> -->
+                    <div class="row justify-content-center">
+                        <div class="col-md-10">
+                            <h1 class="text-center mb-4">Edit <t t-esc="student.name" />
+                            </h1>
+                            <form t-attf-action="/my/student/edit/{{student.id}}" method="post">
+                                <!-- Add CSRF token if required -->
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name:</label>
+                                    <input type="text" id="name" name="name" class="form-control"
+                                        t-att-value="student.name" />
+                                </div>
+
+                                <!-- Email Field -->
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email:</label>
+                                    <input type="email" id="email" name="email" class="form-control"
+                                        t-att-value="student.email" />
+                                </div>
+
+                                <!-- Section Field -->
+                                <div class="mb-3">
+                                    <label for="section" class="form-label">Section:</label>
+                                    <select id="section" name="section" class="form-select">
+                                        <option t-att-selected="student.section == 'A'" value="A">A</option>
+                                        <option t-att-selected="student.section == 'B'" value="B">B</option>
+                                        <option t-att-selected="student.section == 'C'" value="C">C</option>
+                                        <option t-att-selected="student.section == 'D'" value="D">D</option>
+                                        <option t-att-selected="student.section == 'E'" value="E">E</option>
+                                        <option t-att-selected="student.section == 'F'" value="F">F</option>
+                                    </select>
+                                </div>
+
+                                <!-- Version Field -->
+                                <div class="mb-3">
+                                    <label for="version" class="form-label">Version:</label>
+                                    <select id="version" name="version" class="form-select">
+                                        <option t-att-selected="student.version == 'Bangla'"
+                                            value="Bangla">Bangla</option>
+                                        <option t-att-selected="student.version == 'English'"
+                                            value="English">English</option>
+                                    </select>
+                                </div>
+
+                                <!-- Admission Date Field -->
+                                <div class="mb-3">
+                                    <label for="admission_date" class="form-label">Admission Date:</label>
+                                    <input type="date" id="admission_date" name="admission_date"
+                                        class="form-control" t-att-value="student.admission_date" />
+                                </div>
+
+                                <!-- Group Field -->
+                                <div class="mb-3">
+                                    <label for="group" class="form-label">Group:</label>
+                                    <select id="group" name="group" class="form-select">
+                                        <option t-att-selected="student.group == 'Science'"
+                                            value="Science">Science</option>
+                                        <option t-att-selected="student.group == 'Commerce'"
+                                            value="Commerce">Commerce</option>
+                                        <option t-att-selected="student.group == 'Arts'"
+                                            value="Arts">Arts</option>
+                                    </select>
+                                </div>
+
+                                <!-- Weight in KG Field -->
+                                <div class="mb-3">
+                                    <label for="weight_in_kg" class="form-label">Weight (in KG):</label>
+                                    <input type="number" step="0.01" id="weight_in_kg"
+                                        name="weight_in_kg" class="form-control"
+                                        t-att-value="student.weight_in_kg" />
+                                </div>
+
+                                <!-- Weight in Pounds Field -->
+                                <div class="mb-3">
+                                    <label for="weight_in_pounds" class="form-label">Weight (in
+                                        Pounds):</label>
+                                    <input type="number" step="0.01" id="weight_in_pounds"
+                                        name="weight_in_pounds" class="form-control"
+                                        t-att-value="student.weight_in_pounds" />
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="mb-3">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
     </data>
 </odoo>
